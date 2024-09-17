@@ -29,7 +29,18 @@
 #include <tuple>
 #include <vector>
 #endif
-
+enum FilterMode{
+    nearestNeighbor,
+    linear
+    //bilinear
+    //trilinear
+    //anisotropic
+};
+enum WrapMode{
+    repeat,
+    clamp
+    //mirror
+};
 class Renderer
 {
 public:
