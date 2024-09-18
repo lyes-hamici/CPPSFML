@@ -1,19 +1,17 @@
 #ifndef GAME_H
 #define GAME_H
 #include <string>
-class Game
-{
+#include <unordered_set>
+#include <map>
+#include <functional>
+#include "Level.hpp"
+class Game{
 private:
-    int currentScore;
-    int bestScore;
-    std::string texturesPath;
-    std::string fontsPath;
-    void checkScore();
+    std::string levelsPath;
 public:
-    static float deltaTime;
-    Game();
-    ~Game();
-    void run();
+    static std::map<std::string,Level> levels;
+    void Start();
+    void Update();
 };
 
 #endif

@@ -21,6 +21,7 @@ add_executable(${PROJECT_NAME}
 	${CMAKE_SOURCE_DIR}/src/Core/Vector2.cpp
 	${CMAKE_SOURCE_DIR}/src/Game/Board.cpp
 	${CMAKE_SOURCE_DIR}/src/Game/Game.cpp
+	${CMAKE_SOURCE_DIR}/src/Game/GameManager.cpp
 	${CMAKE_SOURCE_DIR}/src/Game/File.cpp
 	${CMAKE_SOURCE_DIR}/src/Input/Input.cpp
 	${CMAKE_SOURCE_DIR}/src/Renderer/Renderer.cpp

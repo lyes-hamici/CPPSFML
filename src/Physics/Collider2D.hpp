@@ -1,8 +1,11 @@
+#ifndef COLLIDER2D_HEADER
+#define COLLIDER2D_HEADER
+#include "Hit.hpp"
 class Collider2D{
     public:
-        bool enabled; //Property; may call events and perform changes
+        bool colliderEnabled; //Property; may call events and perform changes
         bool isStatic;
-        PhysicsLayer layer; //Flags
+        int layer; //Flags
         virtual void OnHitEnter(Hit hit); //Hit stores collision info
         virtual void OnHitStay(Hit hit); //May not be needed
         virtual void OnHitExit(Hit hit); //May not be needed
@@ -10,3 +13,4 @@ class Collider2D{
         virtual void OnOverlapStay(Collider2D other); //May not be needed
         virtual void OnOverlapExit(Collider2D other); //May not be needed
 };
+#endif

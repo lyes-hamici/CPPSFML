@@ -1,3 +1,5 @@
+#ifndef TRANSFORM2D_HEADER
+#define TRANSFORM2D_HEADER
 #include "../Core/Vector2.hpp"
 class Transform2D{ //Basic form, no matrices
     public:
@@ -5,3 +7,4 @@ class Transform2D{ //Basic form, no matrices
         Vector2 scale;
         float angle;
 };
+#endif
