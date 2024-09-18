@@ -189,7 +189,7 @@ Vector2 Renderer::getResolution()
 
 #endif
 
-#ifdef USE_SFML
+
 
 sf::RenderWindow Renderer::window;
 std::map<std::string, sf::Texture> Renderer::images;
