@@ -1,7 +1,7 @@
 #ifndef CANNON_HEADER
 #define CANNON_HEADER
 #include "Entity.hpp"
-#include "../Renderer/RenderObjects2D.hpp"
+#include "../Renderer/RenderObject2D.hpp"
 class Cannon : public Entity, RenderObject2D{
     public:
         float turnSpeed; //Keyboard only

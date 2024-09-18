@@ -1,6 +1,6 @@
 #ifndef BALL_HEADER
 #define BALL_HEADER
-#include "../Renderer/RenderObjects2D.hpp"
+#include "../Renderer/RenderObject2D.hpp"
 #include "../Physics/CircleCollider2D.hpp"
 #include "../Core/Vector2.hpp"
 #include "Entity.hpp"

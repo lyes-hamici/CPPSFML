@@ -3,6 +3,8 @@
 #include "../Renderer/Transform2D.hpp"
 class Entity : public Transform2D{
 	public:
+		Entity();
+		~Entity();
 		virtual void Start();
 		virtual void Update();
 		virtual void SetEnabled(bool enabled);

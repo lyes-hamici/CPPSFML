@@ -1,13 +1,9 @@
-#include <windows.h>
-#include <cctype>
-#include <iostream>
-#include <format>
-#include <filesystem>
 #include <chrono>
-#include "Game.hpp"
-#include "File.hpp"
+#include <filesystem>
 #include "../Input/Input.hpp"
 #include "../Renderer/Renderer.hpp"
+#include "Game.hpp"
+#include "File.hpp"
 std::map<std::string,Level> Game::levels;
 void Game::Start(){
 	Game::levelsPath = "Levels/";
@@ -16,6 +12,7 @@ void Game::Start(){
 		if(!level.LoadFromFile(file.path().string())){continue;}
 		this->levels.emplace(level);
 	}
+	this->cannon = Cannon();
 }
 void Game::Update(){
 	//Board board = Board();

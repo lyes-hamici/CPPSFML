@@ -5,11 +5,12 @@
 #include <map>
 #include <functional>
 #include "Level.hpp"
+#include "Cannon.hpp"
 class Game{
-private:
-    std::string levelsPath;
 public:
+    static std::string levelsPath;
     static std::map<std::string,Level> levels;
+    Cannon cannon;
     void Start();
     void Update();
 };
