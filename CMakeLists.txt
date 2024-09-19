@@ -21,7 +21,11 @@ add_executable(${PROJECT_NAME}
 	${CMAKE_SOURCE_DIR}/src/Game/Brick.cpp
 	${CMAKE_SOURCE_DIR}/src/Core/main.cpp
 	${CMAKE_SOURCE_DIR}/src/Core/Vector2.cpp
-
+	${CMAKE_SOURCE_DIR}/src/Game/Game.cpp
+	${CMAKE_SOURCE_DIR}/src/Game/GameManager.cpp
+	${CMAKE_SOURCE_DIR}/src/Game/File.cpp
+	${CMAKE_SOURCE_DIR}/src/Input/Input.cpp
+	${CMAKE_SOURCE_DIR}/src/Renderer/Renderer.cpp
 )
 set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "${PROJECT_NAME}")
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_${languageStandard})
