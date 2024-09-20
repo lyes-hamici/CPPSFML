@@ -1,8 +1,10 @@
 #ifndef COLLIDER2D_HEADER
 #define COLLIDER2D_HEADER
+#include <map>
 #include "Hit.hpp"
 class Collider2D{
     public:
+        static std::map<std::string,Collider2D> all;
         bool colliderEnabled; //Property; may call events and perform changes
         bool isStatic;
         int layer; //Flags

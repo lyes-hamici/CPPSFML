@@ -6,7 +6,10 @@
 class Brick : public Entity, RenderObject2D, BoxCollider2D{
     public:
         int health;
-        //Override Entity functions
+        using Entity::Entity;
+		void Start() override;
+		void Update() override;
+		void SetEnabled(bool enabled) override;
         //Override hit events
 };
 #endif

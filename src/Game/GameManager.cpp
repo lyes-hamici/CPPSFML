@@ -1,14 +1,14 @@
 #include "GameManager.hpp"
-#include "Game.hpp"
 #include "../Input/Input.hpp"
 #include "../Renderer/Renderer.hpp"
-#include "../Renderer/RenderObject2D.hpp"
 #include <filesystem>
 #include <thread>
 #include <chrono>
-std::unordered_set<Entity> GameManager::activeEntities;
-std::unordered_set<Collider2D> GameManager::activeColliders;
-std::unordered_set<RenderObject2D> GameManager::activeRenderObjects;
+std::chrono::high_resolution_clock::time_point GameManager::lastFrameTick;
+std::string GameManager::texturesPath;
+std::string GameManager::fontsPath;
+float GameManager::deltaTime;
+Game GameManager::game;
 void GameManager::Start(){
 	GameManager::texturesPath = "Images/";
 	GameManager::fontsPath = "Fonts/";
@@ -32,8 +32,8 @@ void GameManager::Start(){
 void GameManager::Update(){
 	Renderer::clear();
 	GameManager::game.Update();
-	for(auto entity : GameManager::activeEntities){entity.Update();}
-	for(auto collider : GameManager::activeColliders){}
-	for(auto renderObject : GameManager::activeRenderObjects){Renderer::draw(renderObject.imageName);}
+	for(auto entity : Entity::all){entity.second.Update();}
+	for(auto collider : Collider2D::all){}
+	for(auto renderObject : RenderObject2D::all){Renderer::draw(renderObject.second.imageName);}
     Renderer::display();
 }

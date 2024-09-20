@@ -1,7 +1,6 @@
-#ifndef GAME_H
-#define GAME_H
+#ifndef GAME_HEADER
+#define GAME_HEADER
 #include <string>
-#include <unordered_set>
 #include <map>
 #include <functional>
 #include "Level.hpp"

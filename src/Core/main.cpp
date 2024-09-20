@@ -9,3 +9,4 @@ int main(int argc, char *argv[])
     Renderer::destroy();
     return 0;
 }
+

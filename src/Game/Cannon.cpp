@@ -1,16 +1,14 @@
 #include "Cannon.hpp"
-#include "GameManager.hpp"
-#include "Game.hpp"
 #include "../Input/Input.hpp"
 #include "../Renderer/Renderer.hpp"
 void Cannon::SetEnabled(bool enabled){
-	auto& renderManager = GameManager::activeRenderObjects;
+	auto& renderManager = RenderObject2D::all;
 	Entity::SetEnabled(enabled);
-	if(enabled && !renderManager.contains(*this)){
-		renderManager.emplace(*this);
+	if(enabled && !renderManager.contains(this->name)){
+		renderManager[this->name] = *this;
 	}
 	else{
-		renderManager.erase(*this);
+		renderManager.erase(this->name);
 	}
 }
 void Cannon::Start(){

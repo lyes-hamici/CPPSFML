@@ -17,13 +17,15 @@ cmake_policy(SET CMP0115 NEW)
 # Executable
 #=================================
 add_executable(${PROJECT_NAME}
-	${CMAKE_SOURCE_DIR}/src/Game/Levels.cpp
-	${CMAKE_SOURCE_DIR}/src/Game/Brick.cpp
 	${CMAKE_SOURCE_DIR}/src/Core/main.cpp
 	${CMAKE_SOURCE_DIR}/src/Core/Vector2.cpp
 	${CMAKE_SOURCE_DIR}/src/Game/Game.cpp
 	${CMAKE_SOURCE_DIR}/src/Game/GameManager.cpp
+	${CMAKE_SOURCE_DIR}/src/Game/Ball.cpp
+	${CMAKE_SOURCE_DIR}/src/Game/Brick.cpp
+	${CMAKE_SOURCE_DIR}/src/Game/Cannon.cpp
 	${CMAKE_SOURCE_DIR}/src/Game/File.cpp
+	${CMAKE_SOURCE_DIR}/src/Game/Level.cpp
 	${CMAKE_SOURCE_DIR}/src/Input/Input.cpp
 	${CMAKE_SOURCE_DIR}/src/Renderer/Renderer.cpp
 )

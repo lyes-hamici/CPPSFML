@@ -7,7 +7,10 @@
 class Ball : public Entity, RenderObject2D, CircleCollider2D{
     public:
         Vector2 velocity;
-        //Override Entity functions
+        using Entity::Entity;
+		void Start() override;
+		void Update() override;
+		void SetEnabled(bool enabled) override;
         //Override hit events
 };
 #endif
