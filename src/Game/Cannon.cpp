@@ -21,6 +21,7 @@ void Cannon::Start(){
 	this->position = Vector2(resolution.x / 2,resolution.y - 20);
 	this->scale.Set(100,100);
 	this->imageName = "CannonNose";
+	this->cooldown = 0.25f;
 	for(auto& ball : this->ballPool){
 		ball.Start();
 	}
@@ -39,6 +40,9 @@ void Cannon::Update(){
 	}
 	if(Input::getPressed("LeftClick")){
 		auto screenHeight = Renderer::getResolution().y;
+		auto now = std::chrono::high_resolution_clock::now();
+		auto elapsed = std::chrono::duration_cast<std::chrono::duration<float>>(now - this->lastShot).count();
+		if(elapsed < this->cooldown){return;}
 		for(auto& ball : this->ballPool){
 			auto thickness = ball.scale / 2;
 			if(ball.position.y < screenHeight + thickness.y){continue;}
@@ -47,6 +51,7 @@ void Cannon::Update(){
 			ball.velocity = ball.velocity.Normalize();
 			break;
 		}
+		this->lastShot = now;
 	}
 	this->angle = std::clamp(this->angle,-65.0f,65.0f);
 }

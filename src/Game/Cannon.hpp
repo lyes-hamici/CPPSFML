@@ -5,9 +5,12 @@
 #include "../Renderer/Transform2D.hpp"
 #include "../Core/Vector2.hpp"
 #include "Ball.hpp"
+#include <chrono>
 class Cannon : public Transform2D{
     public:
         float turnSpeed; //Keyboard only
+		std::chrono::high_resolution_clock::time_point lastShot;
+		float cooldown;
 		Ball ballPool[10];
 		//Entity
 		std::string name;

@@ -51,9 +51,9 @@ void Game::Update(){
 	auto baseTransform = Transform2D();
 	baseTransform.position = cannon.position;
 	baseTransform.scale = cannon.scale;
-	Renderer::draw(cannon.imageName,cannon,Vector2(0.45,1));
-	Renderer::draw("CannonBase",baseTransform,Vector2(0.5,0.5));
 	for(auto ball : cannon.ballPool){
 		Renderer::draw(ball.imageName,ball,Vector2(0.5,0.5));
 	}
+	Renderer::draw(cannon.imageName,cannon,Vector2(0.45,1));
+	Renderer::draw("CannonBase",baseTransform,Vector2(0.5,0.5));
 }
