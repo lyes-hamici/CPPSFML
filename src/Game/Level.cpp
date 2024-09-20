@@ -43,11 +43,13 @@ void Level::Setup() {
             int hp = layout[i][j];  
             if (hp > 0) {  
                 Brick brick;
-                brick.position;
+                brick.Start();
                 this->bricks.push_back(brick);  
             }
         }
     }
 }
+
+// resolution screen , brick size x y , index level.txt
 
 

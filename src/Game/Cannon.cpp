@@ -17,7 +17,7 @@ Cannon::Cannon(){}
 void Cannon::Start(){
 	//Entity::Start();
 	auto resolution = Renderer::getResolution();
-	this->position = Vector2(resolution.x / 2,resolution.y + 20);
+	this->position = Vector2(resolution.x / 2,resolution.y - 80);
 	this->imageName = "CannonNose";
 }
 void Cannon::Update(){

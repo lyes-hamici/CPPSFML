@@ -6,6 +6,7 @@
 #include "Ball.hpp"
 #include "Brick.hpp"
 #include "Cannon.hpp"
+#include "../Renderer/Renderer.hpp"
 
 Ball balls[10];
 Cannon cannon;
@@ -18,9 +19,10 @@ void Game::Start(){
 		auto path = file.path().string();
 		if(!level.LoadFromFile(file.path().string())){continue;}
 		this->levels.push_back(level);
+
 	}
 	cannon.Start();
-	for(auto ball : balls){
+	for(auto& ball : balls){
 		ball.Start();
 	}
 	this->levels[current_level].Setup();
@@ -57,5 +59,14 @@ void Game::Update(){
 	{
 		brick.Update();
 	}
+
+	for (auto brick : this->levels[current_level].bricks)
+	{
+		Renderer::draw(brick.imageName,brick.position,Vector2(100,100));
+	}
+	Renderer::draw(cannon.imageName,cannon.position,Vector2(100,100));
+	Renderer::draw(balls[0].imageName,balls[0].position,Vector2(100,100));
+	
+
 	
 }
