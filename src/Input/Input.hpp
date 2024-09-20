@@ -19,6 +19,7 @@
 #endif
 
 #ifdef USE_SFML
+#include <SFML/Window/Mouse.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <thread> // for std::this_thread::sleep_for
 #include <chrono> // for std::chrono::milliseconds
@@ -45,6 +46,7 @@ public:
 
 #ifdef USE_SFML
     static std::map<std::string, sf::Keyboard::Key> keys;
+    static std::map<std::string,sf::Mouse::Button> mouseButtons;
 #endif
 };
 

@@ -98,6 +98,7 @@ void Input::initialize()
 
 #ifdef USE_SFML
 	std::map<std::string, sf::Keyboard::Key> Input::keys;
+	std::map<std::string,sf::Mouse::Button> Input::mouseButtons;
 
 	void Input::initialize()
 	{
@@ -106,6 +107,7 @@ void Input::initialize()
 		keys["Up"] = sf::Keyboard::Up;
 		keys["Down"] = sf::Keyboard::Down;
 		keys["Escape"] = sf::Keyboard::Escape;
+		mouseButtons["LeftClick"] = sf::Mouse::Left;
 	}
 
 	bool Input::getPressed(char character)
@@ -141,7 +143,19 @@ void Input::initialize()
 			{
 				return false;
 			}
+
+
 		}
+		else if (mouseButtons.contains(name))
+		{
+			if (sf::Mouse::isButtonPressed(mouseButtons[name]))
+			{
+				return true;
+			}
+		}
+		
 		return false;
 	}
+
+
 #endif

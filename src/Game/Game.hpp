@@ -4,12 +4,14 @@
 #include <map>
 #include <functional>
 #include "Level.hpp"
-#include "Cannon.hpp"
+
+
+
 class Game{
 public:
+    int current_level;
     static std::string levelsPath;
-    static std::map<std::string,Level> levels;
-    Cannon cannon;
+    static std::vector<Level> levels;
     void Start();
     void Update();
 };

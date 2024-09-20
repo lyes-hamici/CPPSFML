@@ -32,8 +32,8 @@ void GameManager::Start(){
 void GameManager::Update(){
 	Renderer::clear();
 	GameManager::game.Update();
-	for(auto entity : Entity::all){entity.second.Update();}
-	for(auto collider : Collider2D::all){}
-	for(auto renderObject : RenderObject2D::all){Renderer::draw(renderObject.second.imageName);}
+	//for(auto entity : Entity::all){entity.second.Update();}
+	//for(auto collider : Collider2D::all){}
+	//for(auto renderObject : RenderObject2D::all){Renderer::draw(renderObject.second.imageName);}
     Renderer::display();
 }

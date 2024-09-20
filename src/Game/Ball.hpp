@@ -1,16 +1,33 @@
 #ifndef BALL_HEADER
 #define BALL_HEADER
-#include "../Renderer/RenderObject2D.hpp"
-#include "../Physics/CircleCollider2D.hpp"
+
 #include "../Core/Vector2.hpp"
-#include "Entity.hpp"
-class Ball : public Entity, RenderObject2D, CircleCollider2D{
+#include "../Physics/Hit.hpp"
+#include <string>
+#include "../Renderer/Renderer.hpp"
+
+
+class Ball {
     public:
         Vector2 velocity;
-        using Entity::Entity;
-		void Start() override;
-		void Update() override;
-		void SetEnabled(bool enabled) override;
-        //Override hit events
+		static int count;
+		std::string name;
+		Ball();
+		Ball(std::string name);
+		void Start();
+		void Update();
+		void SetEnabled(bool enabled);
+		bool IsEnabled();
+        bool renderingEnabled; //Property; may call events and perform changes
+        std::string imageName;
+        FilterMode filteringMode; //Enum
+        WrapMode wrapMode; //Enum
+        float radius;
+        void OnHitEnter(Hit hit) ; //Hit stores collision info
+        void OnHitStay(Hit hit) ; //May not be needed
+        void OnHitExit(Hit hit) ; //May not be needed
+        Vector2 position;
+        Vector2 scale;
+        float angle;
 };
 #endif

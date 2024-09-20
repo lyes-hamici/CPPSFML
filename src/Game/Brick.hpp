@@ -1,15 +1,37 @@
 #ifndef BRICK_HEADER
 #define BRICK_HEADER
-#include "Entity.hpp"
-#include "../Renderer/RenderObject2D.hpp"
-#include "../Physics/BoxCollider2D.hpp"
-class Brick : public Entity, RenderObject2D, BoxCollider2D{
+
+#include "../Renderer/Renderer.hpp"
+#include "../Core/Vector2.hpp"
+#include "../Physics/Bounds2D.hpp"
+#include "../Physics/Hit.hpp"
+
+class Brick {
     public:
         int health;
-        using Entity::Entity;
-		void Start() override;
-		void Update() override;
-		void SetEnabled(bool enabled) override;
-        //Override hit events
+        // hit events
+		static int count;
+		std::string name;
+		Brick();
+		Brick(std::string name);
+		void Start();
+		void Update();
+		void SetEnabled(bool enabled);
+		bool IsEnabled();
+        bool renderingEnabled; //Property; may call events and perform changes
+        std::string imageName;
+        FilterMode filteringMode; //Enum
+        WrapMode wrapMode; //Enum
+        Vector2 size; //Property; will affect bounds
+        Bounds2D bounds;
+        void OnHitEnter(Hit hit) ; //Hit stores collision info
+        void OnHitStay(Hit hit) ; //May not be needed
+        void OnHitExit(Hit hit) ; //May not be needed
+        bool colliderEnabled; //Property; may call events and perform changes
+        bool isStatic;
+        int layer;
+        Vector2 position;
+        Vector2 scale;
+        float angle;
 };
 #endif

@@ -29,18 +29,18 @@
 #include <tuple>
 #include <vector>
 #endif
-enum FilterMode{
+typedef enum FilterMode_s{
     nearestNeighbor,
     linear
     //bilinear
     //trilinear
     //anisotropic
-};
-enum WrapMode{
+}FilterMode;
+typedef enum WrapMode_s{
     repeat,
     clamp
     //mirror
-};
+}WrapMode;
 class Renderer
 {
 public:
