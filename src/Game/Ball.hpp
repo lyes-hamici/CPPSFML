@@ -5,9 +5,10 @@
 #include "../Physics/Hit.hpp"
 #include <string>
 #include "../Renderer/Renderer.hpp"
+#include "../Renderer/Transform2D.hpp"
 
 
-class Ball {
+class Ball : public Transform2D{
     public:
         Vector2 velocity;
 		static int count;
@@ -26,8 +27,5 @@ class Ball {
         void OnHitEnter(Hit hit) ; //Hit stores collision info
         void OnHitStay(Hit hit) ; //May not be needed
         void OnHitExit(Hit hit) ; //May not be needed
-        Vector2 position;
-        Vector2 scale;
-        float angle;
 };
 #endif

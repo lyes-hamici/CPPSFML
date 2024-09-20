@@ -1,3 +1,4 @@
+#define _USE_MATH_DEFINES //Needs to be before the cmath include
 #include <string>
 #include <stdexcept>
 #include <cmath>
@@ -66,4 +67,37 @@ Vector2 Vector2::MoveTowards(Vector2 other,float amount){
 		vector.y = std::max(this->y - amount,other.y);
 	}
 	return vector;
+}
+float Vector2::Magnitude(){
+	return std::sqrtf(this->x * this->x + this->y * this->y);
+}
+float Vector2::SquaredMagnitude(){
+	return this->x * this->x + this->y * this->y;
+}
+Vector2 Vector2::Normalize(){
+	auto threshold = 0.00001f;
+	auto magnitude = this->Magnitude();
+	return magnitude > threshold ? *this / magnitude : Vector2();
+}
+float Vector2::DotProduct(Vector2 other){
+	return this->x * other.x + this->y * other.y;
+}
+float Vector2::Angle(Vector2 from,Vector2 to){
+	auto denominator = std::sqrtf(from.SquaredMagnitude() * to.SquaredMagnitude());
+	auto threshold = 0.000000000001;
+	if(denominator < threshold){return 0;}
+	auto dotProduct = from.DotProduct(to) / denominator;
+	return std::acos(dotProduct) * (180 / M_PI);
+}
+float Vector2::SignedAngle(Vector2 from,Vector2 to){
+	auto unsignedAngle = Vector2::Angle(from,to);
+	auto sign = from.x * to.y - from.y * to.x;
+	sign = sign >= 0 ? 1 : -1;
+	return unsignedAngle * sign;
+}
+Vector2 Vector2::Remap(Vector2 fromA,Vector2 toA,Vector2 fromB,Vector2 toB){
+	return fromB + (toB - fromB) * ((*this - fromA) / (toA - fromA));
+}
+Vector2 Vector2::FromAngle(float angle){
+	return Vector2(std::sin(angle),std::cos(angle)) * (180 / M_PI);
 }

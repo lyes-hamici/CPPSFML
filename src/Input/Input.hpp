@@ -23,6 +23,8 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <thread> // for std::this_thread::sleep_for
 #include <chrono> // for std::chrono::milliseconds
+#include "../Renderer/Renderer.hpp" //Needed for window-relative cursor position. *Very* frustrating.
+#include "../Core/Vector2.hpp"
 #endif
 
 class Input
@@ -35,6 +37,8 @@ public:
     static void initialize();
     static bool getPressed(std::string name);
     static bool getPressed(char character);
+    static bool getHeld(std::string name);
+    static bool getHeld(char character);
 
 #ifdef USE_WINDOWSCONSOLE
     static std::map<std::string, int> keys;
@@ -47,6 +51,7 @@ public:
 #ifdef USE_SFML
     static std::map<std::string, sf::Keyboard::Key> keys;
     static std::map<std::string,sf::Mouse::Button> mouseButtons;
+    static Vector2 GetCursorPosition(bool windowRelative=false);
 #endif
 };
 

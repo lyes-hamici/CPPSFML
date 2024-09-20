@@ -99,9 +99,7 @@ void Input::initialize()
 #ifdef USE_SFML
 	std::map<std::string, sf::Keyboard::Key> Input::keys;
 	std::map<std::string,sf::Mouse::Button> Input::mouseButtons;
-
-	void Input::initialize()
-	{
+	void Input::initialize(){
 		keys["Left"] = sf::Keyboard::Left;
 		keys["Right"] = sf::Keyboard::Right;
 		keys["Up"] = sf::Keyboard::Up;
@@ -109,53 +107,60 @@ void Input::initialize()
 		keys["Escape"] = sf::Keyboard::Escape;
 		mouseButtons["LeftClick"] = sf::Mouse::Left;
 	}
-
-	bool Input::getPressed(char character)
-	{
-		if (!std::isalpha(character)) 
-		{
+	bool Input::getPressed(char character){
+		if (!std::isalpha(character)) {
 			return false;
 		}
 		character = std::toupper(character);
 		return sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(character - 'A' + sf::Keyboard::A));
 	}
-
-	bool Input::getPressed(std::string name)
-	{
-		if (name.empty()){
+	bool Input::getPressed(std::string name){
+		if(name.empty()){
 			return false;
 		}
-		if (name.length() == 1){
+		if(name.length() == 1){
 			return getPressed(name[0]);
 		}
-		if (keys.contains(name))
-		{
-			if (sf::Keyboard::isKeyPressed(keys[name]) && !Input::wasPressed)
-			{
+		if(keys.contains(name)){
+			if (sf::Keyboard::isKeyPressed(keys[name]) && !Input::wasPressed){
 				Input::keyPressed = name;
 				return Input::wasPressed = true;
 			}
-			else if (!sf::Keyboard::isKeyPressed(keys[name]) && Input::wasPressed && Input::keyPressed == name)
-			{
+			else if (!sf::Keyboard::isKeyPressed(keys[name]) && Input::wasPressed && Input::keyPressed == name){
 				return Input::wasPressed = false;
 			}
-			else 
-			{
-				return false;
-			}
-
-
+			return false;
 		}
-		else if (mouseButtons.contains(name))
-		{
-			if (sf::Mouse::isButtonPressed(mouseButtons[name]))
-			{
-				return true;
-			}
+		if(mouseButtons.contains(name) && sf::Mouse::isButtonPressed(mouseButtons[name])){
+			return true;
 		}
-		
 		return false;
 	}
-
+	bool Input::getHeld(char character){
+		if (!std::isalpha(character)) {
+			return false;
+		}
+		character = std::toupper(character);
+		return sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(character - 'A' + sf::Keyboard::A));
+	}
+	bool Input::getHeld(std::string name){
+		if(name.empty()){
+			return false;
+		}
+		if(name.length() == 1){
+			return getPressed(name[0]);
+		}
+		if(keys.contains(name)){
+			return sf::Keyboard::isKeyPressed(keys[name]);
+		}
+		if(mouseButtons.contains(name) && sf::Mouse::isButtonPressed(mouseButtons[name])){
+			return true;
+		}
+		return false;
+	}
+	Vector2 Input::GetCursorPosition(bool windowRelative){
+		auto position = windowRelative ? sf::Mouse::getPosition(Renderer::window) : sf::Mouse::getPosition();
+		return Vector2(position.x,position.y);
+	}
 
 #endif

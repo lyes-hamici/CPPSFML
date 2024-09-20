@@ -2,11 +2,12 @@
 #define BRICK_HEADER
 
 #include "../Renderer/Renderer.hpp"
+#include "../Renderer/Transform2D.hpp"
 #include "../Core/Vector2.hpp"
 #include "../Physics/Bounds2D.hpp"
 #include "../Physics/Hit.hpp"
 
-class Brick {
+class Brick : public Transform2D{
     public:
         int health;
         // hit events
@@ -30,8 +31,5 @@ class Brick {
         bool colliderEnabled; //Property; may call events and perform changes
         bool isStatic;
         int layer;
-        Vector2 position;
-        Vector2 scale;
-        float angle;
 };
 #endif
