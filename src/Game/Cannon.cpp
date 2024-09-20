@@ -40,10 +40,12 @@ void Cannon::Update(){
 	if(Input::getPressed("LeftClick")){
 		auto screenHeight = Renderer::getResolution().y;
 		for(auto& ball : this->ballPool){
-			if(ball.position.y < screenHeight + 20){continue;}
+			auto thickness = ball.scale / 2;
+			if(ball.position.y < screenHeight + thickness.y){continue;}
 			ball.position = this->position;
 			ball.velocity = Input::GetCursorPosition(true) - this->position;
 			ball.velocity = ball.velocity.Normalize();
+			break;
 		}
 	}
 	this->angle = std::clamp(this->angle,-65.0f,65.0f);
