@@ -62,7 +62,7 @@ void Game::Update(){
 
 	for (auto brick : this->levels[current_level].bricks)
 	{
-		Renderer::draw(brick.imageName,brick.position,Vector2(100,100));
+		Renderer::draw(brick.imageName,brick.position,brick.size);
 	}
 	Renderer::draw(cannon.imageName,cannon.position,Vector2(100,100));
 	Renderer::draw(balls[0].imageName,balls[0].position,Vector2(100,100));

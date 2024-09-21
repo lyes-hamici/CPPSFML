@@ -2,7 +2,7 @@
 Brick::Brick(){}
 void Brick::Start(){
     
-    this->position = Vector2();
+    
     this->imageName = "ToughGreen";
     
     

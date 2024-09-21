@@ -38,11 +38,24 @@ bool Level::LoadFromFile(const std::string& path) {
 void Level::Setup() {
     bricks.clear();  
 
+    Vector2 brickSize(50, 20); 
+    Vector2 spacing(5, 3);  
+
     for (int i = 0; i < 6; ++i) {  
         for (int j = 0; j < 12; ++j) { 
-            int hp = layout[i][j];  
+            int hp = layout[i][j]; 
             if (hp > 0) {  
                 Brick brick;
+                brick.health = hp;  
+
+                
+                brick.position = Vector2(
+                    j * (brickSize.x + spacing.x), 
+                    i * (brickSize.y + spacing.y)   
+                );
+                
+                brick.size = brickSize;  
+
                 brick.Start();
                 this->bricks.push_back(brick);  
             }
@@ -50,6 +63,6 @@ void Level::Setup() {
     }
 }
 
-// resolution screen , brick size x y , index level.txt
+
 
 
