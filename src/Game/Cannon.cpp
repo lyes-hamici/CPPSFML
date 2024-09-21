@@ -38,6 +38,7 @@ void Cannon::Update(){
 		auto direction = Input::GetCursorPosition(true) - this->position;
 		this->angle = Vector2::SignedAngle(Vector2(0,-1),direction.Normalize());
 	}
+	this->angle = std::clamp(this->angle,-65.0f,65.0f);
 	if(Input::getPressed("LeftClick")){
 		auto screenHeight = Renderer::getResolution().y;
 		auto now = std::chrono::high_resolution_clock::now();
@@ -47,11 +48,10 @@ void Cannon::Update(){
 			auto thickness = ball.scale / 2;
 			if(ball.position.y < screenHeight + thickness.y){continue;}
 			ball.position = this->position;
-			ball.velocity = Input::GetCursorPosition(true) - this->position;
-			ball.velocity = ball.velocity.Normalize();
+			ball.velocity = Vector2::FromAngle(this->angle);
+			ball.velocity.y = -ball.velocity.y;
 			break;
 		}
 		this->lastShot = now;
 	}
-	this->angle = std::clamp(this->angle,-65.0f,65.0f);
 }

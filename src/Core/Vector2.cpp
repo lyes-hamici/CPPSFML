@@ -3,6 +3,9 @@
 #include <stdexcept>
 #include <cmath>
 #include "Vector2.hpp"
+//================================
+// Constructors
+//================================
 Vector2::Vector2(){}
 Vector2::Vector2(float value){
 	this->x = value;
@@ -17,6 +20,9 @@ float& Vector2::operator[](int index){
 	if(index < 0 || index > 1){throw std::out_of_range("[Vector2] Index '"+std::to_string(index)+"' out of range (0-1).");}
 	return index == 0 ? this->x : this->y;
 }
+//================================
+// Operators
+//================================
 bool Vector2::operator==(Vector2 other){
 	return this->x == other.x && this->y == other.y;
 }
@@ -44,6 +50,9 @@ Vector2 Vector2::operator/(Vector2 other){
 Vector2 Vector2::operator/(float divider){
 	return Vector2(this->x / divider,this->y / divider);
 }
+//================================
+// Functions
+//================================
 void Vector2::Set(float value){
 	this->x = value;
 	this->y = value;
@@ -99,5 +108,6 @@ Vector2 Vector2::Remap(Vector2 fromA,Vector2 toA,Vector2 fromB,Vector2 toB){
 	return fromB + (toB - fromB) * ((*this - fromA) / (toA - fromA));
 }
 Vector2 Vector2::FromAngle(float angle){
-	return Vector2(std::sin(angle),std::cos(angle)) * (180 / M_PI);
+	angle *= M_PI / 180;
+	return Vector2(std::sin(angle),std::cos(angle));
 }
