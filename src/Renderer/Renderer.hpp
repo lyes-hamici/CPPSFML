@@ -9,8 +9,8 @@
 #include <string>
 #include <iostream>
 #include <map>
-
 #include "../Core/Vector2.hpp"
+#include "Transform2D.hpp"
 
 #ifdef USE_WINDOWSCONSOLE
 #include <iomanip>
@@ -52,8 +52,7 @@ public:
     static void loadFont(std::string path);
     static void draw();
     static void draw(std::string imageName);
-    static void draw(std::string imageName,Vector2 position,Vector2 size);
-    static void draw(int (&board)[4][4]);
+    static void draw(std::string imageName,Transform2D& transform,Vector2 normalizedOrigin=Vector2());
     static void drawRow(void *row, int size);
     static void drawText(std::string text, std::string fontName, int fontSize, Vector2 pos);
     static Vector2 getResolution();

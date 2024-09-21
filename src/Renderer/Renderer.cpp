@@ -212,16 +212,13 @@ void Renderer::destroy() {
 }
 
 // Effacer la fenêtre
-void Renderer::clear() {
+void Renderer::clear(){
 	window.clear();
+	window.pollEvent(ev);
 }
 
-void Renderer::display()
-{
-
-	if (window.pollEvent(ev)){
-		window.display();
-	}
+void Renderer::display(){
+	window.display();
 }
 
 void Renderer::loadTexture(std::string path) {
@@ -267,28 +264,29 @@ void Renderer::loadFont(std::string path){
 }
 
 void Renderer::draw(std::string imageName){
-	Renderer::draw(imageName,Vector2(0,0),Renderer::getResolution());
+	auto transform = Transform2D();
+	transform.scale = Renderer::getResolution();
+	Renderer::draw(imageName,transform);
 }
 
-void Renderer::draw(std::string imageName,Vector2 position,Vector2 size) {
+void Renderer::draw(std::string imageName,Transform2D& transform,Vector2 normalizedOrigin){
         if (images.find(imageName) == images.end()) {
             // Draw an error/default texture here if necessary
             return;
         }
-
         sf::Sprite sprite;
+		auto textureSize = images[imageName].getSize();
         sprite.setTexture(images[imageName]);
-
         // Define the texture rectangle if needed
-        sprite.setTextureRect(sf::IntRect(0, 0, images[imageName].getSize().x, images[imageName].getSize().y));
-
+        sprite.setTextureRect(sf::IntRect(0,0,textureSize.x,textureSize.y));
+		sprite.setOrigin(normalizedOrigin.x * textureSize.x,normalizedOrigin.y * textureSize.y);
         // Adjust the position
-        sprite.setPosition(position.x, position.y);
-
+        sprite.setPosition(transform.position.x,transform.position.y);
+		sprite.setRotation(transform.angle);
         // Adjust the size by modifying the scale of the sprite
         sf::FloatRect bounds = sprite.getLocalBounds();
-        float scaleX = size.x / bounds.width;
-        float scaleY = size.y / bounds.height;
+        float scaleX = transform.scale.x / bounds.width;
+        float scaleY = transform.scale.y / bounds.height;
         sprite.setScale(scaleX, scaleY);
 
         // Draw the sprite in the window
@@ -306,7 +304,7 @@ void Renderer::drawText(std::string text, std::string fontName, int fontSize, Ve
 
 
 Vector2 Renderer::getResolution() {
-	sf::Vector2u size = window.getSize();
-	return Vector2(size.x, size.y);
+	auto size = window.getSize();
+	return Vector2(size.x,size.y);
 }
 #endif

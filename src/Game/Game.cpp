@@ -7,24 +7,18 @@
 #include "Brick.hpp"
 #include "Cannon.hpp"
 #include "../Renderer/Renderer.hpp"
-
-Ball balls[10];
 Cannon cannon;
 std::string Game::levelsPath;
 std::vector<Level> Game::levels;
 void Game::Start(){
 	Game::levelsPath = "Levels/";
 	for(auto& file : std::filesystem::directory_iterator(this->levelsPath)){
-		auto level = Level();
 		auto path = file.path().string();
+		auto level = Level();
 		if(!level.LoadFromFile(file.path().string())){continue;}
 		this->levels.push_back(level);
-
 	}
 	cannon.Start();
-	for(auto& ball : balls){
-		ball.Start();
-	}
 	this->levels[current_level].Setup();
 }
 void Game::Update(){
@@ -37,36 +31,29 @@ void Game::Update(){
 	if(Input::getPressed("r")){
 		//board.initialize();
 	}
-
-	if (this->levels[current_level].bricks.empty())
-	{
+	if (this->levels[current_level].bricks.empty()){
 		// check click
-		if (Input::getPressed("LeftClick"))
-		{
+		if(Input::getPressed("LeftClick")){
 			this-> current_level++;
 			this->levels[current_level].Setup();
 		}
-		
 	}
-	
-
 	cannon.Update();
-	for(auto ball : balls){
+	for(auto& ball : cannon.ballPool){
 		ball.Update();
 	}
-
-	for (auto brick : this->levels[current_level].bricks)
-	{
+	for (auto& brick : this->levels[current_level].bricks){
 		brick.Update();
 	}
-
-	for (auto brick : this->levels[current_level].bricks)
-	{
+	for (auto& brick : this->levels[current_level].bricks){
 		Renderer::draw(brick.imageName,brick.position,brick.size);
 	}
-	Renderer::draw(cannon.imageName,cannon.position,Vector2(100,100));
-	Renderer::draw(balls[0].imageName,balls[0].position,Vector2(100,100));
-	
-
-	
+	auto baseTransform = Transform2D();
+	baseTransform.position = cannon.position;
+	baseTransform.scale = cannon.scale;
+	for(auto ball : cannon.ballPool){
+		Renderer::draw(ball.imageName,ball,Vector2(0.5,0.5));
+	}
+	Renderer::draw(cannon.imageName,cannon,Vector2(0.45,1));
+	Renderer::draw("CannonBase",baseTransform,Vector2(0.5,0.5));
 }
