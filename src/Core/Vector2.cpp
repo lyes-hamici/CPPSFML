@@ -2,6 +2,7 @@
 #include <string>
 #include <stdexcept>
 #include <cmath>
+#include <algorithm>
 #include "Vector2.hpp"
 //================================
 // Constructors
@@ -61,6 +62,9 @@ void Vector2::Set(float x,float y){
 	this->x = x;
 	this->y = y;
 }
+void Vector2::Clear(){
+	this->Set(0,0);
+}
 Vector2 Vector2::MoveTowards(Vector2 other,float amount){
 	auto vector = Vector2();
 	if(this->x < other.x){
@@ -110,4 +114,19 @@ Vector2 Vector2::Remap(Vector2 fromA,Vector2 toA,Vector2 fromB,Vector2 toB){
 Vector2 Vector2::FromAngle(float angle){
 	angle *= M_PI / 180;
 	return Vector2(std::sin(angle),std::cos(angle));
+}
+bool Vector2::Within(Vector2 minimum,Vector2 maximum){
+	return this->x > minimum.x && this->x < maximum.x && this->y > minimum.y && this->y < maximum.y;
+}
+Vector2 Vector2::Clamp(Vector2 minimum,Vector2 maximum){
+	return Vector2(std::clamp(this->x,minimum.x,maximum.x),std::clamp(this->y,minimum.y,maximum.y));
+}
+float Vector2::DistanceFrom(Vector2 other){
+	return (*this - other).Magnitude();
+}
+Vector2 Vector2::Absolute(){
+	return Vector2(std::fabs(this->x),std::fabs(this->y));
+}
+Vector2 Vector2::Swap(){
+	return Vector2(this->y,this->x);
 }

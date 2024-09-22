@@ -11,7 +11,6 @@
 class Ball : public Transform2D{
     public:
         Vector2 velocity;
-		static int count;
 		std::string name;
 		Ball();
 		Ball(std::string name);

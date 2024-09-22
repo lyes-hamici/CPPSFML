@@ -91,6 +91,7 @@ void Input::initialize()
 		keys["Up"] = sf::Keyboard::Up;
 		keys["Down"] = sf::Keyboard::Down;
 		keys["Escape"] = sf::Keyboard::Escape;
+		keys["Space"] = sf::Keyboard::Space;
 		mouseButtons["LeftClick"] = sf::Mouse::Left;
 	}
 	bool Input::getPressed(char character){

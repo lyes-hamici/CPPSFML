@@ -199,7 +199,7 @@ std::map<std::string,std::string> Renderer::fontFormats;
 sf::Event ev;
 
 void Renderer::initialize(){
-	window.create(sf::VideoMode(600,700),"SFML 2048");
+	window.create(sf::VideoMode(1280,768),"SFML 2048");
 	Renderer::imageFormats[".png"] = "PNG";
 	Renderer::fontFormats[".ttf"] = "TrueType Font";
 }
@@ -270,7 +270,7 @@ void Renderer::draw(std::string imageName){
 }
 
 void Renderer::draw(std::string imageName,Transform2D& transform,Vector2 normalizedOrigin){
-        if (images.find(imageName) == images.end()) {
+        if(images.find(imageName) == images.end()){
             // Draw an error/default texture here if necessary
             return;
         }

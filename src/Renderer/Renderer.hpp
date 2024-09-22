@@ -52,7 +52,7 @@ public:
     static void loadFont(std::string path);
     static void draw();
     static void draw(std::string imageName);
-    static void draw(std::string imageName,Transform2D& transform,Vector2 normalizedOrigin=Vector2());
+    static void draw(std::string imageName,Transform2D& transform,Vector2 normalizedOrigin=Vector2(0,0));
     static void drawRow(void *row, int size);
     static void drawText(std::string text, std::string fontName, int fontSize, Vector2 pos);
     static Vector2 getResolution();

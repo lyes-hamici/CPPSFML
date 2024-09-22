@@ -12,10 +12,11 @@ public:
 
     std::string name;
     int layout[6][12]; 
-    std::vector<Brick> bricks;  
+    std::vector<Brick> bricks;
+    bool empty;
     bool LoadFromFile(const std::string& path);
-    void Setup();
-
+    void Start();
+    void Update();
 };
 
 #endif
